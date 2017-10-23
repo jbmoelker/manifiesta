@@ -8,6 +8,7 @@
     "build": "node build/build.js",
     "dev": "run-p dev:*",
     "dev:app": "PORT=6264 node build/dev-server.js",
+    "dev:guide": "start-storybook -p 6267 -c config/storybook -s ./",
     "dev:services": "micro-dev services.js -p ${PORT:-6265}",
     "lint": "eslint --ext .js,.vue src",
     "prestart": "npm run build",
@@ -21,6 +22,9 @@
     "vuetify": "0.16.7"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "3.2.13",
+    "@storybook/addon-knobs": "3.2.13",
+    "@storybook/vue": "3.2.13",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",

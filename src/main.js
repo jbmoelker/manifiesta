@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import App from './components/app/app'
-require('../node_modules/vuetify/dist/vuetify.min.css')
+require('vuetify/dist/vuetify.min.css')
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
