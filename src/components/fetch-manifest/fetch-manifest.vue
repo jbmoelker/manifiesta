@@ -40,7 +40,7 @@
       fetchManifest () {
         this.isFetching = true
         manifestStore.setData({})
-        fetch(`https://fetch-manifest.now.sh/?url=${this.url}`)
+        fetch(`${process.env.FETCH_MANIFEST_API}?url=${this.url}`)
           .then(response => response.json())
           .then(response => {
             this.isFetching = false
