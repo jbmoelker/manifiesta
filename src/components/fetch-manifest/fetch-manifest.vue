@@ -1,7 +1,7 @@
 <template>
   <v-form v-model="urlValid" @submit.prevent="handleSubmit" class="fetch-manifest">
     <v-text-field label="URL" v-model="fetchUrl" :rules="urlErrors" required></v-text-field>
-    <v-btn :disabled="disabled" @click.prevent="handleSubmit">
+    <v-btn class="fetch-manifest__button" :disabled="disabled" @click.prevent="handleSubmit">
       <template v-if="isFetching">Fetching ... </template>
       <template v-else>Fetch manifest</template>
     </v-btn>
@@ -9,34 +9,17 @@
 </template>
 
 <script>
+  import VueTypes from 'vue-types'
   const invalidUrlError = 'Invalid url'
 
   export default {
     props: {
-      setManifest: {
-        type: Function,
-        required: true
-      },
-      url: {
-        type: String,
-        required: true
-      },
-      setUrl: {
-        type: Function,
-        required: true
-      },
-      isFetching: {
-        type: Boolean,
-        required: true
-      },
-      setIsFetching: {
-        type: Function,
-        required: true
-      },
-      setError: {
-        type: Function,
-        required: true
-      }
+      setManifest: VueTypes.func.isRequired,
+      url: VueTypes.string.isRequired,
+      setUrl: VueTypes.func.isRequired,
+      isFetching: VueTypes.bool.isRequired,
+      setIsFetching: VueTypes.func.isRequired,
+      setError: VueTypes.func.isRequired
     },
     data () {
       return {

@@ -1,16 +1,21 @@
 <template>
   <v-navigation-drawer app v-model="isOpen" clipped persistent absolute width="450" class="editor">
-    <fetch-manifest :setManifest="setManifest" :url="url" :setUrl="setUrl" :isFetching="isFetching" :setIsFetching="setIsFetching" :setError="setError"></fetch-manifest>
-    <div v-if="isFetching" class="fetching">
+    <fetch-manifest :setManifest="setManifest" :url="url"
+    :setUrl="setUrl" :isFetching="isFetching"
+    :setIsFetching="setIsFetching" :setError="setError"></fetch-manifest>
+    <div v-if="isFetching" class="editor__fetching">
       <p>Searching for manifest ... </p>
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
-    <div v-if="noManifestAfterSearch" class="no-manifest">
+    <div v-if="noManifestAfterSearch" class="editor__no-manifest">
       <p>No manifest found on the given url</p>
-      <v-btn color="primary" @click="setSkeleton" class="create-manifest">Create a manifest</v-btn>
-      <p class="error-message">{{error}}</p>
+      <v-btn color="primary" @click="setSkeleton" class="editor__create-manifest">Create a manifest</v-btn>
+      <p class="editor__error-message">{{error}}</p>
     </div>
     <template v-if="!manifestIsEmpty">
+      <div class="editor__sw-checkbox">
+        <v-checkbox v-model="checkbox" label="Has a Service Worker"></v-checkbox>
+      </div>
       <manifest-editor :manifest="manifest" :setManifest="setManifest"></manifest-editor>
       <manifest-errors></manifest-errors>
     </template>
@@ -18,6 +23,7 @@
 </template>
 
 <script>
+  import VueTypes from 'vue-types'
   import manifestSkeleton from '../../lib/manifest-skeleton.json'
   import FetchManifest from '../fetch-manifest/fetch-manifest'
   import ManifestEditor from '../manifest-editor/manifest-editor'
@@ -30,31 +36,18 @@
       ManifestErrors
     },
     props: {
-      isOpen: {
-        type: Boolean,
-        required: true
-      },
-      manifest: {
-        type: Object,
-        required: true
-      },
-      setManifest: {
-        type: Function,
-        required: true
-      },
-      url: {
-        type: String,
-        required: true
-      },
-      setUrl: {
-        type: Function,
-        required: true
-      }
+      isOpen: VueTypes.bool.isRequired,
+      manifest: VueTypes.object.isRequired,
+      setManifest: VueTypes.func.isRequired,
+      url: VueTypes.string.isRequired,
+      setUrl: VueTypes.func.isRequired,
+      setHasSw: VueTypes.func.isRequired
     },
     data () {
       return {
         firstFetch: true,
         isFetching: false,
+        checkbox: false,
         error: ''
       }
     },
@@ -65,6 +58,11 @@
       noManifestAfterSearch () {
         const {isFetching, firstFetch, manifestIsEmpty} = this
         return !isFetching && !firstFetch && manifestIsEmpty
+      }
+    },
+    watch: {
+      checkbox () {
+        this.setHasSw(this.checkbox)
       }
     },
     methods: {

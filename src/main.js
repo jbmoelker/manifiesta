@@ -3,7 +3,9 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import App from './components/app/app'
+
 require('vuetify/dist/vuetify.min.css')
+require('mdi/css/materialdesignicons.min.css')
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
