@@ -4,8 +4,6 @@
 
 const path = require('path')
 
-console.log('GH_REPO', process.env.GH_REPO)
-
 module.exports = {
   build: {
     env: require('./prod.env'),
