@@ -27,7 +27,7 @@
 }
 
 .editor__create-manifest {
-  margin-bottom: calc($default-space * .75);
+  margin-bottom: $default-space * .75;
 }
 
 .editor__error-message {

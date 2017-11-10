@@ -11,12 +11,12 @@
 }
 
 .preview-criteria__list {
-  padding-bottom: calc($default-space * .5);
+  padding-bottom: $default-space * .5;
 }
 
 .preview-criteria__item {
   position: relative;
-  margin-bottom: calc($default-space * .5);
+  margin-bottom: $default-space * .5;
   padding-left: $default-space;
 }
 
