@@ -1,9 +1,9 @@
 <template>
   <v-toolbar clipped-left absolute app color="primary">
-    <v-btn v-if="open" icon class="white--text" @click.stop="toggleEditor">
+    <v-btn v-if="this.isOpen" icon class="white--text" @click.stop="toggleEditor">
       <v-icon>arrow_back</v-icon>
     </v-btn>
-    <v-btn v-if="!open" icon class="white--text" @click.stop="toggleEditor">
+    <v-btn v-if="!this.isOpen" icon class="white--text" @click.stop="toggleEditor">
       <v-icon>arrow_forward</v-icon>
     </v-btn>
     <v-toolbar-title class="white--text">Manifiesta</v-toolbar-title>
@@ -17,11 +17,6 @@
     props: {
       isOpen: VueTypes.bool.isRequired,
       toggleEditor: VueTypes.func.isRequired
-    },
-    computed: {
-      open () {
-        return this.isOpen
-      }
     }
   }
 </script>
