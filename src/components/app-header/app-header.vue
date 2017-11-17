@@ -1,6 +1,11 @@
 <template>
   <v-toolbar clipped-left absolute app color="primary">
-    <v-toolbar-side-icon class="white--text" @click.stop="toggleEditor"></v-toolbar-side-icon>
+    <v-btn v-if="open" icon class="white--text" @click.stop="toggleEditor">
+      <v-icon>arrow_back</v-icon>
+    </v-btn>
+    <v-btn v-if="!open" icon class="white--text" @click.stop="toggleEditor">
+      <v-icon>arrow_forward</v-icon>
+    </v-btn>
     <v-toolbar-title class="white--text">Manifiesta</v-toolbar-title>
   </v-toolbar>
 </template>
@@ -10,7 +15,13 @@
 
   export default {
     props: {
+      isOpen: VueTypes.bool.isRequired,
       toggleEditor: VueTypes.func.isRequired
+    },
+    computed: {
+      open () {
+        return this.isOpen
+      }
     }
   }
 </script>
