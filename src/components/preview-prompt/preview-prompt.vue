@@ -1,9 +1,11 @@
 <template>
   <div class="preview">
-    <preview-device device="nexus-5x">
-      <chrome-nav></chrome-nav>
-      <chrome-prompt v-if="Object.keys(manifest).length" :manifest="manifest" :url="url" :hasSw="hasSw"></chrome-prompt>
+    <preview-device :browser="browser">
       <browser-viewport :url="url"></browser-viewport>
+      <template v-if="browser.value === 'chrome'">
+        <chrome-nav></chrome-nav>
+        <chrome-prompt v-if="Object.keys(manifest).length" :manifest="manifest" :url="url" :hasSw="hasSw"></chrome-prompt>
+      </template>
     </preview-device>
     <preview-criteria :manifest="manifest" :url="url" :hasSw="hasSw"></preview-criteria>
   </div>
@@ -28,7 +30,8 @@
     props: {
       manifest: VueTypes.object.isRequired,
       url: VueTypes.string.isRequired,
-      hasSw: VueTypes.bool.isRequired
+      hasSw: VueTypes.bool.isRequired,
+      browser: VueTypes.object.isRequired
     }
   }
 </script>
