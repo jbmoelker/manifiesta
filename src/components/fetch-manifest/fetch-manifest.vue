@@ -23,7 +23,7 @@
     },
     data () {
       return {
-        fetchUrl: 'https://voorhoede.nl',
+        fetchUrl: '',
         urlErrors: [
           (value) => {
             try {

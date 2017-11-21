@@ -1,6 +1,6 @@
 <template>
   <v-toolbar class="preview-controls white elevation-1">
-    <v-select :value="selectedBrowser" :items="browserOptions" @change="browserChange" item-text="text" item-value="value" return-object class="preview-controls__select mr-4"></v-select>
+    <v-select :value="selectedBrowser" :items="browserOptions" @change="changeBrowser" item-text="text" item-value="value" return-object class="preview-controls__select mr-4"></v-select>
     <v-slider disabled class="preview-controls__slider mr-4" v-model="zoomLevel" :min="zoomLevelMin" :max="zoomLevelMax" :step="zoomStep" snap :label="computedZoomLevel"></v-slider>
     <v-btn-toggle v-model="toggleView" mandatory class="mr-4">
       <v-btn flat disabled>
@@ -49,7 +49,7 @@
       }
     },
     methods: {
-      browserChange (value) {
+      changeBrowser (value) {
         this.$emit('previewControls:changeBrowser', value)
       }
     }
