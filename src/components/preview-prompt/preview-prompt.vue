@@ -7,7 +7,7 @@
         <chrome-prompt v-if="criteriaIsMet" :manifest="manifest" :url="url" :hasSw="hasSw"></chrome-prompt>
       </template>
     </preview-device>
-    <preview-criteria :criteriaList="criteriaList"></preview-criteria>
+    <preview-criteria :browser="browser" :criteriaList="criteriaList"></preview-criteria>
   </div>
 </template>
 
