@@ -4,10 +4,10 @@
       <browser-viewport :url="url"></browser-viewport>
       <template v-if="browser.value === 'chrome'">
         <chrome-nav></chrome-nav>
-        <chrome-prompt v-if="Object.keys(manifest).length" :manifest="manifest" :url="url" :hasSw="hasSw"></chrome-prompt>
+        <chrome-prompt v-if="criteriaIsMet" :manifest="manifest" :url="url" :hasSw="hasSw"></chrome-prompt>
       </template>
     </preview-device>
-    <preview-criteria :manifest="manifest" :url="url" :hasSw="hasSw"></preview-criteria>
+    <preview-criteria :criteriaList="criteriaList"></preview-criteria>
   </div>
 </template>
 
@@ -18,6 +18,7 @@
   import ChromeNav from '../chrome-nav/chrome-nav'
   import PreviewDevice from '../preview-device/preview-device'
   import PreviewCriteria from '../preview-criteria/preview-criteria'
+  import listCriteria from '../../lib/chrome-prompt-criteria'
 
   export default {
     components: {
@@ -32,6 +33,14 @@
       url: VueTypes.string.isRequired,
       hasSw: VueTypes.bool.isRequired,
       browser: VueTypes.object.isRequired
+    },
+    computed: {
+      criteriaIsMet () {
+        return Object.values(this.criteriaList).every(Boolean)
+      },
+      criteriaList () {
+        return listCriteria({url: this.url, hasSw: this.hasSw, manifest: this.manifest})
+      }
     }
   }
 </script>
